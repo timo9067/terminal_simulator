@@ -80,10 +80,12 @@ def process():
             running = True
             stop_event.clear()
             threading.Thread(target=process_json(filename)).start()
-            return jsonify({'message': 'Process started'})
+            return jsonify({'message': 'Process started'}), 200
 
         except FileNotFoundError:
             return jsonify({'message': 'File not found'}), 404
+    elif command == '' and not running:
+        return jsonify({'message': 'READY TO WORK'}), 200
     elif command == 'stop' and running:
         running = False
         stop_event.set()
@@ -94,4 +96,4 @@ def process():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(debug=False, host='0.0.0.0', port=port)
+    app.run(debug=True, host='0.0.0.0', port=port)
