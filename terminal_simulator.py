@@ -36,9 +36,11 @@ def process_json(filename):
             interval = current_request_time - request_time
 
             # for testing purposes, shows the pause before next request in CLI
-            print(interval)
+            print(f'Interval before the next request: {interval}')
 
-            del record['TimeStamp']
+            simulated_request_time = datetime.now()
+            record['TimeStamp'] = simulated_request_time.strftime('%Y/%m/%d %H:%M:%S.%f')
+
             sleep(interval.total_seconds())
 
             if url:
