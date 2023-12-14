@@ -1,1 +1,1 @@
-web: gunicorn terminal_simulator.py:app
+web: gunicorn terminal_simulator:app
